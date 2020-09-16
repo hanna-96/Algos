@@ -18,12 +18,12 @@ const isPalindrome = (str) => {
     let last = str[str.length - 1]; //last char
     if (first !== last) return false;
     else {
-     str = str.slice(1, str.length - 1);
+     str.slice(1, str.length - 1);
       return true;
     }
   }
 };
-console.log(isPalindrome("RaCecAr"));
+console.log(isPalindrome('!? 100 ABCcba 001 ?!'));
 
 //option 2 recursive
 //time O(n);space O(n)
@@ -36,7 +36,7 @@ const isPal = (str) => {
     if (first !== last) return false;
     else {
      str =  str.slice(1, str.length - 1);
-     console.log('sliced Str',str)
+    //  console.log('sliced Str',str)
       return isPal(str);
     }
   }
@@ -47,7 +47,7 @@ console.log(isPal('rAcEcar'));
 const isPalindrome2 = (str)=>{
     str = str.toLowerCase();
     let strCopy = str.split('').reverse().join('');
-    console.log("reversed str",strCopy)
+    // console.log("reversed str",strCopy)
     if(str !== strCopy) return false;
     return true;
 }
