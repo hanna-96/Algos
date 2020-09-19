@@ -13,4 +13,23 @@ function nodeDepths(root) {
       }
       return sum
   }
+  //option 2 recursive Time O(n)
+  function nodeDepths(root,depth = 0) {
+    // Write your code here.
+      if(root === null) return 0
+      return depth + nodeDepths(root.left,depth+1)+nodeDepths(root.right,depth+1)
+  }
+  //time O(n),where n=total number of nodes in the tree ;not doing anything expensive
+  //space O(h), h-> is the height of the tree; the max number of function calls 
+  // on the callstack will be the height of the tree
+  
+  // This is the class of the input binary tree.
+  class BinaryTree {
+    constructor(value) {
+      this.value = value;
+      this.left = null;
+      this.right = null;
+    }
+  }
+  
   
