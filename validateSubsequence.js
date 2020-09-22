@@ -4,7 +4,7 @@
 //Output TRUE
 
 //option 1
-//time O(n); space O(n);
+//time O(n); space O(1);
 function isValidSubsequence(array, sequence) {
   // Write your code here.
   let arrPointer = 0;
@@ -31,6 +31,7 @@ function isValidSubsequence(array, sequence) {
     //only if we find a matching number then move to the next el in sequence arr
     //if the integer is not === then keep looping
     if (array[i] === sequence[currentPosition]) {
+        //move to next integer in seq arr
       currentPosition++;
     }
   }
