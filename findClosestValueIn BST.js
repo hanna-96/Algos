@@ -29,7 +29,7 @@ class BST {
     this.left = null;
     this.right = null;
   }
-}
+} 
 //solution  2 iterative
 function findClosestValueInBst(tree, target) {
   // Write your code here.
