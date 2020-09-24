@@ -19,7 +19,8 @@ class BinaryTree {
     this.right = null;
   }
 }
-
+//Time- O(n)
+//space O(n) , where n = number of nodes in BST
 function branchSums(root, sums = [], sum = 0) {
   // Write your code here.
   sum += root.value; //1
