@@ -8,6 +8,8 @@
 // return 2.
 
 // Note: You may assume the string contains only lowercase English letters.
+
+//time O(n)
 var firstUniqChar = function (s) {
   let memo = {};
   for (let i = 0; i < s.length; i++) {

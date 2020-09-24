@@ -14,7 +14,7 @@
 //time: O(n);space: O(1)
 function pairSum(arr,sum){
     let left = arr[0];
-    let right = arr[arr.length-1];
+    let right = arr.length-1;
     while(left< right){
        let currentSum = arr[left]+arr[right];
        if(currentSum=== sum) return true;
@@ -26,7 +26,6 @@ function pairSum(arr,sum){
     }
     return false;
 }
-console.log('result',pairSum([0, 2, 3, 6, 9, 10], 10))
 
 //          solution 2 (using memoization)
 //time: O(n);space: O(1)
@@ -46,4 +45,3 @@ function pairSum2(arr,sum){
     return false;
    
 }
-console.log('result 2 ',pairSum2([1, 1, 2, 3, 4, 5], 7))
