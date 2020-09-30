@@ -45,11 +45,12 @@ function bubbleSort(array) {
   }
   return array;
 }
-function swap(i, j, array) {
-  let temp = array[j];
-  array[j] = array[i];
-  array[i] = temp;
-}
+const swap = (i, j, array) => {
+  [array[i], array[j]] = [array[j], array[i]];
+  // let temp = array[j];
+  // array[j] = array[i];
+  // array[i] = temp;
+};
 //Best Time O(n)(when ythe inpout arrays is already sorted)
 //average Time O(n^2)
 //Space O(1)
