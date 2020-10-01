@@ -45,7 +45,7 @@ function validateBst(tree) {
 function validateBSTHelper(tree, min, max) {
   //if we reach a leaf node(bottom of the tree) -> we are done with traversing a tree
   if (tree === null) return true;
-  //every node has a min value and a max value
+  //every node has a min possible value and a max  possible value
   //check if a current node is between the min value and max value
   //if not -> it's not  a BSt
   //max value should be >= to that node
