@@ -8,11 +8,10 @@
 
 // You must do this in-place without making a copy of the array.
 // Minimize the total number of operations.
-
 //Time O(n)
 //space O(1)
 var moveZeroes = function (nums) {
-  let ancorPointer = 0;
+  let ancorPointer = 0;//ancor will always point only to 0' s
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] !== 0) {
       //swaping places  0 el with a nonZero
