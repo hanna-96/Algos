@@ -24,12 +24,12 @@ var isValid = function (s) {
   //initialize a stack
   let stack = [];
   for (let bracket of s) {
-    //if we come across an opening bracket ->push it to the stack
+    //if we come across an OPENING bracket -> push it to the stack
     if (bracket === "(" || bracket === "[" || bracket === "{") {
       stack.push(bracket);
     }
     //if we come across any closing bracket compare it to the top(last) element in the stack
-    //If they are matching pairs->pop() from stack
+    /// and If they are matching pairs->pop() from stack
     //continue till the stack is empty
     else if (
       (stack.length && bracket === ")") ||
