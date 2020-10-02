@@ -50,6 +50,7 @@ function validateBSTHelper(tree, min, max) {
   //if not -> it's not  a BSt
   //max value should be >= to that node
   //min value shoud be < then node
+  debugger;
   if (tree.value >= max || tree.value < min) return false;
   // if yes then check if its left subtree is valid as well as its right subtree
   return (
@@ -57,3 +58,4 @@ function validateBSTHelper(tree, min, max) {
     validateBSTHelper(tree.right, tree.value, max)
   );
 }
+validateBst([5,1,4,null,null,3,6])
