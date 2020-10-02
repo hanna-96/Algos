@@ -40,14 +40,10 @@ var numberOfSteps = function (num) {
   return steps;
 };
 //solution 2 using recursion
-var numberOfSteps = function (num) {
-  let steps = 0;
-  if (num === 0) return steps;
-  if (num % 2 === 0) {
-    steps++;
-    return steps + numberOfSteps(num / 2);
-  } else if (num % 2 === 1) {
-    steps++;
-    return steps + numberOfSteps(num - 1);
-  }
-};
+var numberOfSteps  = function(num,steps = 0) {
+    if (num === 0) return steps;
+    if (num % 2 === 0) return numberOfSteps(num/2, steps + 1)
+    else {
+        return numberOfSteps(num - 1, steps + 1)
+    }
+}
