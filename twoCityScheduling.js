@@ -66,3 +66,24 @@ var twoCitySchedCost = function (costs) {
 
   return companyCosts;
 };
+//solution 2 
+var twoCitySchedCost = function(costs) {
+  //sort arr so that in first part will be the most effecient people to send
+  //(minimum difference between cityA and cityB)
+  costs.sort((a, b) => a[0] - a[1] - (b[0] - b[1]));
+  //find out how many ppl can go to each city
+  let limit = costs.length / 2;
+  //define two counters for costs
+  let minCostA = 0;
+  let minCostB = 0;
+  //loop through kind of 1st half of the sorted arr(with min costs)
+  ////but UNTILL we reach limit
+  for (let i = 0; i < limit; i++) {
+      minCostA+=costs[i][0];
+  }
+  //the rest of ppl in the sorted arr will go to cityB
+  for (let i = limit; i < costs.length; i++) {
+      minCostB+=costs[i][1];
+  }
+  return minCostA + minCostB;
+};
