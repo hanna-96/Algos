@@ -52,8 +52,10 @@ var islandPerimeter = function (grid) {
       if (grid[i][j] === 0) continue;
       else {
         perimeter += 4;
+        //while looping we'll be checking ONLY 2 neighbours(top and left);
+        //if they're lands then subtract 2 from perimeter
         if (i > 0 && grid[i - 1][j] === 1) perimeter -= 2; //checking top neighbour
-        if (j > 0 && grid[i][j - 1] === 1) perimeter -= 2;
+        if (j > 0 && grid[i][j - 1] === 1) perimeter -= 2;//checking the left neighbour
       }
     }
   }
