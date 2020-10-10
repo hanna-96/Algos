@@ -47,8 +47,8 @@ function traverseNode(i, j, matrix, visited, results) {
   //where i is the row, j is a column at which node is located
 
   //Keep track of unvisited nodes that could be part of the same river we are investigating
-  let nodesToExplore = [[i, j]];
-  //while we still have neighboures to explore
+  let nodesToExplore = [[i, j]]; //like stack where every element([node at row i, col j])
+  //while we still have neighbours to explore
   while (nodesToExplore.length) {
     //works like DFS
     let currentNode = nodesToExplore.pop();
