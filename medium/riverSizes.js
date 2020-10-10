@@ -2,7 +2,7 @@
 //need to keep track of all 1's ve seen AND
 //keep track of which rivers they are part of!!!
 
-//every element in the arr is a node(vertix)
+//every element in the matrix is a node(vertix).Each node has a value(either 1 or 0)
 //each node has neighbouring nodes(above,below,right,left)
 //traverse(BFS,DFS) the graph and at every node check:
 //1. if the node has a value of 1 THEN it is part of the river
