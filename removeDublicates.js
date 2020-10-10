@@ -27,7 +27,7 @@ var removeDuplicates = function (nums) {
 };
 // optimal solution
 //the goal in this approach is to move all the unique chars at the beginning of the arr
-// ex: [0,0,1,1,1,2,2,3,3,4], => [1,2,3,4,0,1,1,2,3]
+// ex: [0,1,1,1,2,2,3,3,4], => [1,2,3,4,0,1,1,2,3]
 var removeDuplicates = function (nums) {
   //use pointer i to keep track of unique chars
   let i = 0;
