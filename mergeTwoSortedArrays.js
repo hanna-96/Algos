@@ -8,7 +8,7 @@
 // nums2 = [2,5,6],       n = 3
 
 //Output: [1,2,2,3,5,6]
-
+//solution 1 (2 pointers start  from the end)
 var merge = function (nums1, m, nums2, n) {
   //m is the number of elements initialized in nums1
   //n is the number of elements initialized in nums2
@@ -35,8 +35,38 @@ var merge = function (nums1, m, nums2, n) {
   }
   return nums1;
 };
+//Time O(n+m)
+//Space O(1)
+
+//solution 2 (2 pointers start from the beginning)
+var merge = function (nums1, m, nums2, n) {
+  let p1 = 0;
+  let p2 = 0;
+  let copyNums1 = nums1.slice();
+  for (let i = 0; i < nums1.length; i++) {
+    if (p1 < m && p2 < n) {
+      if (copyNums1[p1] <= nums2[p2]) {
+        nums1[i] = copyNums1[p1];
+        p1++;
+      } else if (copyNums1[p1] > nums2[p2]) {
+        nums1[i] = nums2[p2];
+        p2++;
+      }
+    } else if (p1 >= m) {
+      nums1[i] = nums2[p2];
+      p1++;
+      p2++;
+    } else if (p2 >= n) {
+      nums1[i] = copyNums1[p1];
+      p1++;
+    }
+  }
+  return nums1;
+};
 
 //naive solution
+//Time O((n+m)log(n+m))
+//Space O(1)
 // nums1.splice(m,n)
 //   nums1.push(...nums2)
 //   nums1.sort((a,b)=>a-b)
