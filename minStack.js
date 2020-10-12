@@ -68,20 +68,14 @@ var MinStack = function () {
   this.minNums = [];
 };
 
-/**
- * @param {number} x
- * @return {void}
- */
+
 MinStack.prototype.push = function (x) {
-  //we'll push a new num to minstack ONLY if it's lesser or equal to num
+  //we'll push a new num to minstack ONLY if it's lesser or equal then the already min num
   if (!this.stack.length || x <= this.minNums[this.minNums.length - 1])
     this.minNums.push(x);
   this.stack.push(x);
 };
 
-/**
- * @return {void}
- */
 MinStack.prototype.pop = function () {
   //if a num is not the minimum from the minstack then fine we can easily delete it
   if (
@@ -96,16 +90,10 @@ MinStack.prototype.pop = function () {
   }
 };
 
-/**
- * @return {number}
- */
 MinStack.prototype.top = function () {
   return this.stack[this.stack.length - 1];
 };
 
-/**
- * @return {number}
- */
 MinStack.prototype.getMin = function () {
   return this.minNums[this.minNums.length - 1];
 };
