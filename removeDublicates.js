@@ -33,7 +33,7 @@ var removeDuplicates = function (nums) {
   let i = 0;
   for (let j = 1; j < nums.length; j++) {
     //we need to replace the element AFTER pointer i
-    //with the element at pointer j
+    //with the element at pointer j ONLY if they are not the same elements
     if (nums[j] !== nums[i]) {
       nums[i + 1] = nums[j];
       i++;
