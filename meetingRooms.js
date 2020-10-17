@@ -7,7 +7,8 @@
 
 // The idea here is to sort the meetings by starting time.
 //Then, go through the meetings one by one and make sure that each meeting ends before the next one starts.
-
+//time O(n log n)
+//space O(1)
 function meetingRooms(arr) {
   //GOAL is to find overlaping elements
   //1. sort the meeting by starting time
@@ -25,3 +26,12 @@ function meetingRooms(arr) {
   }
   return true;
 }
+// option 2
+function meetingRooms(arr) {
+  arr.sort((a, b) => a[0] - b[0]);
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i][1] > arr[i + 1][0]) return false;
+  }
+  return true;
+}
+//time and space the same as above
