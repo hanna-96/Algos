@@ -19,13 +19,14 @@ var merge = function (nums1, m, nums2, n) {
   //and whichever one is bigger-> we'll put it as a last element of the 1st array
   //1. get a reference(pointer) to the last initialized element in the nums1 arr
   let first = m - 1;
-  let second = n - 1;
+  let second = nums2.length - 1;
   //2.now we need to iterate over both arrays backwards
-  for (let i = m + n - 1; i >= 0; i--) {
+  for (let i = nums1.length - 1; i >= 0; i--) {
     //i will always start from the end of the nums1
     if (second < 0) break; //meaning that everything from the nums2 is already in nums1 and it is sorted->>Nothing left in nums2 to compare
     if (nums1[first] > nums2[second]) {
-      nums1[i] = nums1[first];
+      let temp = nums1[first];
+      nums1[first] = nums2[second];
       first--;
     } else {
       //basically replacing 0s at the end with actual numbers from nums2
