@@ -50,3 +50,25 @@ function arrayOfProducts(array) {
   }
   return res;
 }
+// MORE optimal solution
+//time O(n); space O(n)
+function arrayOfProducts(array) {
+  // Write your code here.
+  let res = [];
+
+  let leftProducts = 1; //stores the  left products of the neighbours of the curEl
+  //loop and store the products of all elements to the left of current el
+
+  for (let i = 0; i < array.length; i++) {
+    res[i] = leftProducts;
+    leftProducts *= array[i];
+  }
+  let rightProducts = 1;
+  //loop after we found all leftProfucts of each el=>find its rightProducts AND multiply it by the input el itself
+
+  for (let i = array.length - 1; i >= 0; i--) {
+    res[i] *= rightProducts;
+    rightProducts *= array[i];
+  }
+  return res;
+}
