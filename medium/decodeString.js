@@ -15,6 +15,7 @@
 // Input: s = "2[abc]3[cd]ef"
 // Output: "abcabccdcdcdef"
 
+//Time O(n);Space O(n)
 var decodeString = function (s) {
   //     k is how many times we repeat str;
   //     [ - now I need to start storing what I want to repeat;
