@@ -45,3 +45,34 @@ function sunsetViews(buildings, direction) {
   if (direction === "EAST") res.reverse();
   return res;
 }
+//solution 2 (using a stack)
+function sunsetViews(buildings, direction) {
+  let stack = []; //here we'll store the buildings that can currently see the sunset
+  let startIdx, step;
+  let maxHeight = 0;
+  if (direction === "EAST") {
+    startIdx = 0;
+    step = 1;
+  } else if (direction === "WEST") {
+    startIdx = buildings.length - 1;
+    step = -1;
+  }
+
+  let idx = startIdx;
+  //while looping through input arr we'll have to renove AT MOST n elements fron stack
+  while (idx >= 0 && idx < buildings.length) {
+    //as soon as we get to a point where we reach a building that has a height
+    //greater than one of the buidings that can currently see the sunset => then those buildings(from stack)
+    //CAN NO LONGER see the sunset
+    while (
+      stack.length &&
+      buildings[idx] >= buildings[stack[stack.length - 1]]
+    ) {
+      stack.pop();
+    }
+    stack.push(idx);
+    idx = idx + step;
+  }
+  if (direction === "WEST") stack.reverse();
+  return stack;
+}
