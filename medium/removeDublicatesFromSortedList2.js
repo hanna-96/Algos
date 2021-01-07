@@ -27,7 +27,6 @@ var deleteDuplicates = function (head) {
       // skip all duplicates
       prevNode.next = head.next;
     } else {
-      // skip all duplicates
       // otherwise, move prevNode
       prevNode = prevNode.next;
     }
