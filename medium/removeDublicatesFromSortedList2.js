@@ -17,14 +17,21 @@ var deleteDuplicates = function (head) {
   let prevNode = dummyHead; // the last node before the sublist of duplicates
 
   while (head !== null) {
+    // if it's a beginning of duplicates sublist
+    // skip all duplicates
     if (head.next && head.val === head.next.val) {
+      // move till the end of duplicates sublist
       while (head.next && head.val === head.next.val) {
         head = head.next;
       }
+      // skip all duplicates
       prevNode.next = head.next;
     } else {
+      // skip all duplicates
+      // otherwise, move prevNode
       prevNode = prevNode.next;
     }
+    // move forward
     head = head.next;
   }
   return dummyHead.next;
