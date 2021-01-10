@@ -14,19 +14,18 @@
 // Space O(n)
 function waterArea(heights) {
   // Write your code here.
-  //for each index calculate how much water will be contained under that index
+  //for each index calculate how much water will be contained above that index
   //if there's no pillar at least at one side of the existing pillar->
   //then the water spills(No reason to calculate it)
+  //!!!Water should be trapped in between two pillars!!!
   //1. find the tallest pillar to the left of the current index
-  //and  find the tallest pillar to the right to it
-  //2.find the minimum height of two tallest pillars
-  //find what is the smallest between the two tallest(right , left)  to see if the current element has room for water
-  //3.Find the minHeight( difference between the min tallest and the current element height )
-  //And if the minHeight < currentEl then substract currentEl from minHeigt and it will be
+  //2.  find the tallest pillar to the right to it
+  //3.find the minimum height of two tallest pillars=>
+  // what is the smallest between the two tallest(right , left)  to see if the current element has room for water
+  //4.if the minHeight < currentEl then substract currentEl from minHeigt and it will be
   //how much water can be trapped above the current element
   //BUT if curEl>minHeight => water will be 0 (it will run away)
-  //4. make a new arr(the same length as input) and at each index in the new arr
-  //we'll store the tallest pillar to the left of the current i we re at
+
   let maxes = [];
   let leftMax = 0;
 
@@ -45,16 +44,49 @@ function waterArea(heights) {
     //because maxes[i] already has the tallest leftMax stored
     let minHeight = Math.min(rightMax, maxes[i]); //min between maxRight and maxLeft  0
     if (heights[i] < minHeight) {
+      //element is lower then pillars so wthere's room for water above it
       maxes[i] = minHeight - heights[i];
     } else {
-      maxes[i] = 0; //. 0
+      maxes[i] = 0; // pillar is lower then element->water will run away
     }
     //update the rightMax with each iteration
     rightMax = Math.max(rightMax, heights[i]); // 3
   }
   return maxes.reduce((curEl, sum) => sum + curEl, 0);
 }
+//solution 2 using 3 loops(time and space are the same as above)
+function waterArea(heights) {
+  // Write your code here.
 
+  let leftmaxes = [];
+  let lMax = 0;
+
+  for (let i = 0; i < heights.length; i++) {
+    leftmaxes[i] = lMax;
+    lMax = Math.max(heights[i], lMax);
+  }
+  console.log("leftmaxes", leftmaxes);
+  let rightMaxes = [];
+  let rMax = 0;
+
+  for (let i = heights.length - 1; i >= 0; i--) {
+    rightMaxes[i] = rMax;
+    rMax = Math.max(rMax, heights[i]);
+  }
+  console.log("rightmaxes", rightMaxes);
+  let area = 0;
+  let res = [];
+  for (let i = 0; i < heights.length; i++) {
+    //now looking at current el let's calculate the area of water above it
+    let minHeight = Math.min(leftmaxes[i], rightMaxes[i]); //take the min Height on both sides of current el
+    if (heights[i] < minHeight) {
+      //find the difference between the minHeight and the current el(how much water will be stored)
+      //and add it to the prev area
+      area += minHeight - heights[i]; // skip+skip+8+8+3+8+8+skip+3+3+2+2+3=>48
+    }
+  }
+  return area;
+}
 //solution 2 pointers
 function waterArea(heights) {
   // Write your code here.
