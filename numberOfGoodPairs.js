@@ -7,6 +7,8 @@
 // Output: 4
 // Explanation: There are 4 good pairs (0,3), (0,4), (3,4), (2,5) 0-indexed.
 
+//brute force solution
+//Time O(n^2);Space O(1)
 var numIdenticalPairs = function (nums) {
   let pairs = 0;
   for (let i = 0; i < nums.length; i++) {
@@ -15,4 +17,17 @@ var numIdenticalPairs = function (nums) {
     }
   }
   return pairs;
+};
+
+//optimixed solution;
+//Time O(n);Space O(1)
+const numIdenticalPairs = (nums) => {
+  let map = {};
+  let counter = 0;
+
+  for (val of nums) {
+    !map[val] ? (map[val] = 1) : (counter += map[val]++);
+  }
+
+  return counter;
 };
