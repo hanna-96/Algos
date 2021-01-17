@@ -25,8 +25,6 @@ function subarraySort(array) {
     if (isOutOfOrder(i, num, array)) {
       smallestNum = Math.min(smallestNum, num); //  6
       largestNum = Math.max(largestNum, num); //12
-      // console.log('smallest',smallestNum)
-      // console.log('largest',largestNum)
     }
   }
   //if we never found and out of order num or sumArr=>it means array is already sorted
@@ -51,7 +49,5 @@ function isOutOfOrder(i, num, array) {
   //compare the current num to its adjacent neighbours
   if (i === array.length - 1) return array[i - 1] > num;
   if (i === 0) return array[i + 1] < num;
-  // console.log(array[i-1],' and num is',num)
-  // console.log(' num is',num,'and next is', array[i+1])
   return array[i - 1] > num || array[i + 1] < num;
 }
