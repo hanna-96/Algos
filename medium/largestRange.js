@@ -12,6 +12,52 @@
 //Input   = [1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6];
 //Output = [0,7]
 
+//optimized solution
+//Time O(n); Space O(n), where n-is the length of the input array
+function largestRange(array) {
+  // Write your code here.
+  //1.store all the numbers in a hash table so that later we can access them fast
+  //2.loop through arr and for each number IF it's value in obj wasn't visited(true) then
+  //3.traverse all the numbers that are < than current num and all the numbers that are > current num
+  //and check if they are in a hash table.(Every number you explore in obj mark it to false)
+  let obj = {};
+  let largest = 0;
+  let range = [];
+  for (let i = 0; i < array.length; i++) {
+    if (!obj[array[i]]) {
+      obj[array[i]] = true;
+    }
+  }
+  console.log("obj", obj);
+  for (let i = 0; i < array.length; i++) {
+    if (obj[array[i]] === false) {
+      continue;
+    } else {
+      obj[array[i]] = false; //mark it as visited
+      let curLength = 1;
+      let left = array[i] - 1;
+      //check if there are any numbers in the array that come right BEFORE the current num
+      while (obj[left]) {
+        obj[left] = false; //mark it as visited
+        curLength++;
+        left--;
+      }
+      let right = array[i] + 1;
+      //check if there are any numbers in the array that come right AFTER the current num
+      while (obj[right]) {
+        obj[right] = false;
+        curLength++;
+        right++;
+      }
+      if (largest < curLength) {
+        largest = curLength;
+        range = [left + 1, right - 1]; //go back to the left and right that was the last we saw in the obj
+      }
+    }
+  }
+  return range;
+}
+
 //brute force solution
 //Time O(n log n) Space O(n)
 function largestRange(array) {
