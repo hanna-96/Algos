@@ -32,15 +32,15 @@ function maxSubsetSumNoAdjacent(array) {
 // Time O(n), Space O(1)
 
 function maxSubsetSumNoAdjacent(array) {
-  // Write your code here.
   if (!array.length) return 0;
   if (array.length < 2) return array[0];
-  let second = array[0]; //maxSum[i-2]
-  let first = Math.max(array[0], array[1]); //represents  maxSum[i-1]
+
+  let first = array[0]; //serves as the previous not adjacent number
+  let second = Math.max(array[0], array[1]); //will serve as the sum of the previous not adjacent numbers
   for (let i = 2; i < array.length; i++) {
-    let current = Math.max(first, second + array[i]);
-    second = first;
-    first = current;
+    let currentMaxSum = Math.max(first + array[i], second); //195
+    first = second;
+    second = currentMaxSum; //195
   }
-  return first;
+  return second;
 }
