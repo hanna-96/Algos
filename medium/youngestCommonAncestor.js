@@ -66,3 +66,48 @@ function findDepth(topAncestor, currentDescendant) {
   }
   return depth;
 }
+
+//solution two
+//Time, space are the same as above
+function getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo) {
+  //find how deep each descendant is located
+  let descendantOneDepth = findDepth(topAncestor, descendantOne);
+  let descendantTwoDepth = findDepth(topAncestor, descendantTwo);
+  if (descendantOneDepth > descendantTwoDepth) {
+    return backtrackingTree(
+      descendantOne,
+      descendantTwo,
+      descendantOneDepth - descendantTwoDepth
+    );
+  } else {
+    return backtrackingTree(
+      descendantTwo,
+      descendantOne,
+      descendantTwoDepth - descendantOneDepth
+    );
+  }
+}
+
+function findDepth(topAncestor, currentDescendant) {
+  let depth = 0;
+  while (currentDescendant !== topAncestor) {
+    depth++;
+    currentDescendant = currentDescendant.ancestor;
+  }
+  return depth;
+}
+
+function backtrackingTree(lowerNode, higherNode, diff) {
+  //move them up untill they are at the same level
+  while (diff > 0) {
+    lowerNode = lowerNode.ancestor;
+    diff--;
+  }
+  //once they're at the same level move both of them up until theare at the same spot
+  while (lowerNode !== higherNode) {
+    lowerNode = lowerNode.ancestor;
+    higherNode = higherNode.ancestor;
+  }
+  //that same spot will be their youngest common ancestor
+  return lowerNode;
+}
