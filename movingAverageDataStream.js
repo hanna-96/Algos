@@ -55,3 +55,35 @@ MovingAverage.prototype.next = function (val) {
   }
   return average;
 };
+//solution two(using a queue)
+var MovingAverage = function (size) {
+    this.size = size;
+    this.values = []; //act like a queue, where we'll store only n(size) amount of values
+    this.sum = 0;
+  };
+  
+  /**
+   * @param {number} val
+   * @return {number}
+   */
+  //[1,10,3,5];     //sum=14 -3 +5 =16
+  //    |
+  
+  //we need to count the average ONLY of the last n elements in the values array, where n=== window size
+  MovingAverage.prototype.next = function (val) {
+    let average;
+    if (this.values.length < this.size) {
+      this.sum += val;
+    } else {
+      //once there're more elements in the values array then the given size of the window;
+      // we need to substract the 1st one and add a new val(so that we'll cinsider always only the n last elelemnts!!!)
+      let removedEl = this.values.shift();
+      this.sum -= removedEl; //substract the 1st val from the sum
+      this.sum += val; //add a new val
+    }
+    this.values.push(val);
+    //eventually we'll have this.values = [1,10,3,5];  but we need the average only of the last n (size) ones
+    average = this.sum / this.values.length;
+    return average;
+  };
+  
