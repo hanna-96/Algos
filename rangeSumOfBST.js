@@ -46,3 +46,27 @@ const rangeSumBST = (root, low, high) => {
 function isInRange(node, low, high) {
   return node.val >= low && node.val <= high;
 }
+//solution 2 (using stack);
+const rangeSumBST2 = (root, low, high) => {
+  let total = 0;
+  let stack = [];
+  // init stack
+  stack.push(root);
+
+  while (stack.length > 0) {
+    let node = stack.pop();
+    if (!node) continue;
+
+    if (node.val < low) {
+      if (node.right) stack.push(node.right);
+    } else if (node.val > high) {
+      if (node.left) stack.push(node.left);
+    } else {
+      total += node.val;
+      if (node.left) stack.push(node.left);
+      if (node.right) stack.push(node.right);
+    }
+  }
+
+  return total;
+};
