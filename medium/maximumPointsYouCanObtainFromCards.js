@@ -50,3 +50,29 @@ var maxScore = function (cardPoints, k) {
   }
   return maxScore;
 };
+//solution 2
+var maxScore = function (cardPoints, k) {
+  let currentScore = 0;
+  let maxScore = 0;
+  let totalSum = cardPoints.reduce((cur, sum) => sum + cur, 0);
+  if (cardPoints.length === k) return totalSum;
+  let windowSum = 0; //will represent the sum of numbers that we haven't selected
+  //and we will not select length-k numbers at any given point in time
+  let length = cardPoints.length;
+  //length-k are all the numbers that we haven't selected
+
+  //sum up the first length-k numbers
+  for (let i = 0; i < length - k; i++) {
+    windowSum += cardPoints[i]; //calculating the sum of the sliding window
+  }
+  console.log("initial windowSize", windowSum);
+  let res = totalSum - windowSum; //our first potential result(assuming we selected the last three cards)
+
+  //now let's slide the window and add a new number to it AND remove the oldest number
+  for (let i = length - k; i < cardPoints.length; i++) {
+    windowSum += cardPoints[i] - cardPoints[i - (length - k)];
+    //with each iteration we check if we have a new number that is greater then the previously added number
+    res = Math.max(res, totalSum - windowSum);
+  }
+  return res;
+};
