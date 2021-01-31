@@ -18,12 +18,39 @@
 
 //brute force solution
 // Time O(n log n); Space O(N)
-var sortedSquares = function(nums) {
-let res = [];
+var sortedSquares = function (nums) {
+  let res = [];
 
-for(let i=0;i<nums.length;i++){
-res[i] = nums[i]*nums[i]
-}
-return res.sort((a,b)=>a-b)
+  for (let i = 0; i < nums.length; i++) {
+    res[i] = nums[i] * nums[i];
+  }
+  return res.sort((a, b) => a - b);
 };
 
+//more optimal solution
+// Time O(n); space O(1)
+var sortedSquares = function (nums) {
+  let res = [];
+  let start = 0;
+  let end = nums.length - 1;
+  let i = end;
+  //we will build the result array from the end
+  while (start <= end) {
+    let square1 = nums[start] * nums[start];
+    let square2 = nums[end] * nums[end];
+
+    if (square1 < square2) {
+      //or
+      // res.unshift(square2);
+      res[i] = square2;
+      end--;
+    } else {
+      res[i] = square1;
+      //or
+      // res.unshift(square1);
+      start++;
+    }
+    i--; //we need to decrement i because we don't always move p2—
+  }
+  return res;
+};
