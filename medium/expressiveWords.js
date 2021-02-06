@@ -16,26 +16,38 @@
 // We can't extend "helo" to get "heeellooo" because the group "ll" is not size 3 or more.
 
 var expressiveWords = function (S, words) {
-  const isExpressive = (word) => {
-    let wI = 0;
-    let sI = 0;
+  function isExpressive(word) {
+    let j = 0;
+    let i = 0;
 
-    while (wI < word.length || sI < S.length) {
-      let countW = 1;
-      let countS = 1;
+    while (j < word.length || i < S.length) {
+      let countAdjacentLettersInWord = 1;
+      let countAdjacentLettersInS = 1;
 
-      if (word[wI] !== S[sI]) return false;
+      if (word[j] !== S[i]) return false;
 
-      while (word[wI] === word[wI++ + 1]) countW++;
-      while (S[sI] === S[sI++ + 1]) countS++;
-
-      if (countS < countW || (countS !== countW && countS < 3)) return false;
+      while (word[j] === word[j + 1]) {
+        console.log(j, "cur wI");
+        j++;
+        countAdjacentLettersInWord++;
+      }
+      while (S[i] === S[i + 1]) {
+        i++;
+        countAdjacentLettersInS++;
+      }
+      i++;
+      j++;
+      if (
+        countAdjacentLettersInS < countAdjacentLettersInWord ||
+        (countAdjacentLettersInS !== countAdjacentLettersInWord &&
+          countAdjacentLettersInS < 3)
+      )
+        return false;
     }
 
     return true;
-  };
-  let count = words.filter(isExpressive).length;
-  console.log("count", count);
+  }
+  let count = words.filter((w) => isExpressive(w)).length;
   return count;
 };
 
