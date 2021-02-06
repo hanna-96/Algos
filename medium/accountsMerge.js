@@ -21,19 +21,20 @@
 
 //build graph based from accounts
 var accountsMerge = function (accounts) {
-  let graph = {}; //store each email as a key and asiign to it a value of Set of emails to which the current email is connected(any emails following it in the same account)
-  let nameDict = {}; ////link every email to the account it belongs
+  let graph = {}; //store each email as a key and assign to it a value of Set of emails to which the current email is connected(any emails following it in the same account)
+  let nameDict = {}; //link every email to the name of the account it belongs to
 
   for (let acc of accounts) {
     let name = acc[0];
     nameDict[acc[1]] = name;
+    //for each account loop through it's emails and find if they can be connected
     for (let i = 1; i < acc.length; i++) {
       if (!graph[acc[i]]) graph[acc[i]] = new Set();
       nameDict[acc[i]] = name;
-      //if in the account there're more than 1 email =>let's connect it to each other
 
+      //if in the  current account there're more than 1 email =>let's connect it to each other
       if (i != 1) {
-        graph[acc[1]].add(acc[i]);
+        graph[acc[1]].add(acc[i]); //the first email is connected to another email in the same account
         graph[acc[i]].add(acc[1]);
       }
     }
@@ -42,16 +43,16 @@ var accountsMerge = function (accounts) {
   let res = [];
   let visited = new Set();
 
-  //will traverse graph using DFS
+  //will traverse graph using DFS and return an array of emails assosiated with one account
   let dfs = function (key) {
     visited.add(key);
     let emails = [key];
+    //iterate through Set values
     graph[key].forEach((e) => {
       if (!visited.has(e)) {
         emails.push(...dfs(e)); //whatever was already in emails add the result of DFS on email from graph
       }
     });
-
     return emails;
   };
 
@@ -59,7 +60,7 @@ var accountsMerge = function (accounts) {
     if (!visited.has(key)) {
       let temp = dfs(key); //we'll get an array of all the emails that belong to one user
       temp.sort();
-      temp.unshift(nameDict[temp[0]]); //add the name of the account owner
+      temp.unshift(nameDict[temp[0]]); //add the name of the account owner to the temp emails array
       res.push(temp); //add all the emails
     }
   }
