@@ -28,6 +28,7 @@ const MyCalendar = () => {
  * @return {boolean}
  */
 //Time O(n^2),where n is the number of events booked. For each new event, we process every previous event to decide whether the new event can be booked.
+//Space O(n)
 MyCalendar.prototype.book = function (start, end) {
   // two events [s1, e1) and [s2, e2) do not conflict if and only if one of them starts after the other one ends
   for (let event of this.events) {
@@ -38,4 +39,48 @@ MyCalendar.prototype.book = function (start, end) {
   }
   this.events.push([start, end]);
   return true;
+};
+
+//solution 2 (using a balanced Binary Tree)
+//Time O(n log n);Space O(n)
+var MyCalendar = function () {
+  this.root = null;
+};
+
+/**
+ * @param {number} start
+ * @param {number} end
+ * @return {boolean}
+ */
+
+function Node(start, end) {
+  this.s = start;
+  this.e = end;
+  this.left = null;
+  this.right = null;
+}
+
+MyCalendar.prototype.book = function (start, end) {
+  if (!this.root) {
+    return (this.root = new Node(start, end));
+  } else {
+    let rec = (start, end, root) => {
+      if (root.e <= start) {
+        if (root.right) return rec(start, end, root.right);
+        else {
+          root.right = new Node(start, end);
+          return true;
+        }
+      } else if (root.s >= end) {
+        if (root.left) return rec(start, end, root.left);
+        else {
+          root.left = new Node(start, end);
+          return true;
+        }
+      } else {
+        return false;
+      }
+    };
+    return rec(start, end, this.root);
+  }
 };
