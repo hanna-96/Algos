@@ -10,8 +10,8 @@
 // Input: grid = [[0,0,1,0,0],[0,1,0,1,0],[0,1,1,1,0]]
 // Output: 1
 
-//Time O(n)
-const closedIsland =  (grid) =>{
+//Time O(m*n);Space O(m*n)
+const closedIsland = (grid) => {
   let count = 0;
   //traverse grid
   //find a 0
@@ -22,11 +22,13 @@ const closedIsland =  (grid) =>{
   //b) if at least one neighbour is 1 => check if all other 0 are 1s
 
   function isIsland(i, j) {
+    //everytime we traverse a node if we find a 1 rern true because it means that current node is surrounded at leasrt by 1 water
     if (grid[i][j] === 1) return true;
 
     //but if it is 0 ,mark it as visited
     //and check if there are other 0's that are part of the same island
     if (grid[i][j] === 0) {
+      //if current 0 touches the boundries return false(It is not part of closed island)
       if (
         i === 0 ||
         i === grid.length - 1 ||
@@ -35,14 +37,13 @@ const closedIsland =  (grid) =>{
       )
         return false;
       grid[i][j] = 2;
-      let result = true;
       //if neighbour is 0 check if its neighbors are part of the island as well
-      if (!isIsland(i - 1, j)) result = false;
-      if (!isIsland(i + 1, j)) result = false;
-      if (!isIsland(i, j - 1)) result = false;
-      if (!isIsland(i, j + 1)) result = false;
-
-      return result;
+      const up = isIsland(i - 1, j);
+      const down = isIsland(i + 1, j);
+      const left = isIsland(i, j - 1);
+      const right = isIsland(i, j + 1);
+      //if any of the neighbors result ijn false then the current node is not a closed island!!!
+      return up && down && left && right;
     }
 
     return true;
