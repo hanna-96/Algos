@@ -46,3 +46,36 @@ function countSumOfNodes(currentLinkedList, currentSum) {
   currentSum = +currentSum.reverse().join("");
   return currentSum;
 }
+//solution 2
+function sumOfLinkedLists(linkedListOne, linkedListTwo) {
+  let carry = 0;
+  let nodeOne = linkedListOne;
+  let nodeTwo = linkedListTwo;
+  let newList = new LinkedList(0);
+  let current = newList;
+  while (nodeOne || nodeTwo || carry !== 0) {
+    let firstNum, secondNum;
+    if (nodeOne) {
+      firstNum = nodeOne.value;
+    } else firstNum = null;
+    if (nodeTwo) {
+      secondNum = nodeTwo.value;
+    } else secondNum = null;
+
+    let sum = firstNum + secondNum + carry;
+
+    let newNum = sum % 10;
+    let newNode = new LinkedList(newNum); //1
+    current.next = newNode;
+    current = newNode;
+    carry = Math.floor(sum / 10);
+
+    if (nodeOne) {
+      nodeOne = nodeOne.next;
+    } else nodeOne = null;
+    if (nodeTwo) {
+      nodeTwo = nodeTwo.next;
+    } else nodeTwo = null;
+  }
+  return newList.next;
+}
