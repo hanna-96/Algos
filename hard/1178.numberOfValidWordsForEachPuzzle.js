@@ -64,6 +64,41 @@ function find(wordList, keypads) {
   }
   return res;
 }
+
+//bit manipulation approach
+var findNumOfValidWords = function (words, puzzles) {
+    var aCharCode = "a".charCodeAt();
+    var puzzlesLetters = new Array(puzzles.length);
+    var firstLetter = new Array(puzzles.length);
+    for (var i = 0; i < puzzles.length; i++) {
+      puzzlesLetters[i] = firstLetter[i] =
+        1 << (puzzles[i][0].charCodeAt() - aCharCode);
+      for (var j = 1; j < puzzles[i].length; j++) {
+        puzzlesLetters[i] |= 1 << (puzzles[i][j].charCodeAt() - aCharCode);
+      }
+    }
+  
+    var result = new Array(puzzles.length).fill(0);
+    var wordsLetters;
+    for (var i = 0; i < words.length; i++) {
+      wordsLetters = 0;
+      for (var j = 0; j < words[i].length; j++) {
+        wordsLetters |= 1 << (words[i][j].charCodeAt() - aCharCode);
+      }
+  
+      for (var j = 0; j < puzzles.length; j++) {
+        if (
+          (puzzlesLetters[j] & wordsLetters) === wordsLetters &&
+          (firstLetter[j] & wordsLetters) === firstLetter[j]
+        ) {
+          result[j]++;
+        }
+      }
+    }
+  
+    return result;
+  };
+  
 // find(
 //   ["APPLE", "PLEAS", "PLEASE"],
 //   ["AELWXYZ", "AELPXYZ", "AELPSXY", "SAELPRT", "XAEBKSY"]
