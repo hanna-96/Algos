@@ -27,7 +27,7 @@ function cycleInGraph(edges) {
   let nodeIsCurrentlyInStack = new Array(edges.length).fill(false); //helps to keep track of the vertex that is still processing in a recursive call
   for (let i = 0; i < edges.length; i++) {
     let node = i; //0
-    // if(visited[node]) continue;
+    if(visited[node]) continue;
     const hasCycle = traverseGraph(
       node,
       edges,
