@@ -40,3 +40,38 @@ function searchForRange(array, target) {
   }
   return [-1, -1];
 }
+//solution 2
+function searchForRange(array, target) {
+  const finalRange = [-1, -1];
+  helper(array, target, 0, array.length - 1, finalRange, true); //check the left side
+  helper(array, target, 0, array.length - 1, finalRange, false); //check the right side
+  return finalRange;
+}
+function helper(array, target, leftIdx, rightIdx, finalRange, goLeft) {
+  while (leftIdx <= rightIdx) {
+    let mid = Math.floor((leftIdx + rightIdx) / 2);
+    if (array[mid] === target) {
+      //exlore the left side
+      if (goLeft) {
+        if (mid === 0 || array[mid - 1] !== target) {
+          finalRange[0] = mid;
+          return;
+        } else {
+          rightIdx = mid - 1;
+        }
+      } else {
+        //explore right side
+        if (mid === array.length - 1 || array[mid + 1] !== target) {
+          finalRange[1] = mid;
+          return;
+        } else {
+          leftIdx = mid + 1;
+        }
+      }
+    } else if (array[mid] > target) {
+      rightIdx = mid - 1;
+    } else {
+      leftIdx = mid + 1;
+    }
+  }
+}
