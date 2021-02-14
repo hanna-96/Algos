@@ -10,6 +10,7 @@
 //Input  = [0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 61, 71, 73],target = 45
 //Output [4,9]
 
+//Tome O(n log n));Space O(1)
 function searchForRange(array, target) {
   let left = 0;
   let right = array.length - 1;
