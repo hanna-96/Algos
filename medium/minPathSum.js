@@ -11,27 +11,24 @@
 // Input: grid = [[1,2,3],[4,5,6]]
 // Output: 12
 
-//Time O(m*n);Space O(m+n)
-const minPathSum = (grid) => {
+//Time O(m*n);Space O(1)
+const minPathSum = function (grid) {
   //create arr the same size as grid
-  //traverse grid and at each cell store the sum of path that took us to current node
-  //maybe store all the possible paths somewhere??
-  let res = [...grid];
+  //traverse grid and at each cellcalculate and store the sum of paths that took us to current node(cell);
+  //Eventually, when we get to the last node and store the sum for him =>the will be result
   const i = grid.length - 1;
   const j = grid[0].length - 1;
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
-      cols = grid[i].length;
-      if (i === 0 && j === 0) res[i][j] = grid[i][j];
-      else if (i === 0 && j > 0) res[i][j] = grid[i][j] + grid[i][j - 1];
-      else if (j === 0) res[i][j] = grid[i][j] + grid[i - 1][j];
-      // res[i][j] = grid[i][j]+ grid[i-1][j]
+      if (i === 0 && j === 0) grid[i][j] = grid[i][j];
+      else if (i === 0 && j > 0) grid[i][j] = grid[i][j] + grid[i][j - 1];
+      else if (j === 0) grid[i][j] = grid[i][j] + grid[i - 1][j];
       else
-        res[i][j] = Math.min(
+        grid[i][j] = Math.min(
           grid[i][j] + grid[i][j - 1],
           grid[i][j] + grid[i - 1][j]
         );
     }
   }
-  return res[i][j];
+  return grid[i][j];
 };
