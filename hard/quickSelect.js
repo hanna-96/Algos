@@ -4,6 +4,7 @@
 //Input  = [8, 5, 2, 9, 7, 6, 3], k =3
 //Output 5
 
+//Time O(n); Space O(1)
 function quickselect(array, k) {
   let position = k - 1;
   if (array.length === 1) return k;
