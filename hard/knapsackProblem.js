@@ -14,6 +14,8 @@
 //   the knapsack, your function can return any of them.
 //Input  = [[1, 2], [4, 3], [5, 6], [6, 7]], capacity 10
 //Output [10, [1, 3]] , // items [4, 3] and [6, 7]
+
+//Time O(nc), Space O(nc), where n is the number of items and c is the capacity
 function knapsackProblem(items, capacity) {
   //items[0] = item value
   //items[1] = item capacity
