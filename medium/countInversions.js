@@ -11,6 +11,8 @@
 // Output:  2
 // The two inversions are {9, 6, 4} and {9, 6, 5}
 // Returns count of inversions of size 3
+
+//Time O(n^2); space O(1)
 function getInvCount(arr) {
   let count = 0; // Initialize result
 
