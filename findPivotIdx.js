@@ -40,3 +40,16 @@ const pivotIndex = (nums) => {
   }
   return -1;
 };
+//optimal solution
+//Time O(n), space O(1)
+const pivotIndex = (nums) => {
+  let sum = nums.reduce((cur, sum) => sum + cur, 0); //28
+  let leftSum = 0;
+  let rightSum = 0;
+  for (let i = 0; i < nums.length; i++) {
+    rightSum = sum - leftSum; //28 27 20 17
+    leftSum += nums[i]; //1 8 11 17;
+    if (rightSum === leftSum) return i;
+  }
+  return -1;
+};
