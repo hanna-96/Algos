@@ -44,3 +44,22 @@ const fizzBuzz = (n) => {
   }
   return res;
 };
+//solution 2
+//Time O(n),space O(1)
+const fizzBuzz = (n) => {
+  let res = [];
+
+  for (let i = 1; i <= n; i++) {
+    let num = i;
+    let divisibleBy3 = num % 3 === 0;
+    let divisibleBy5 = num % 5 === 0;
+    let str = "";
+    if (divisibleBy3) str += "Fizz";
+    if (divisibleBy5) str += "Buzz";
+    else if (!str.length) {
+      str = num.toString();
+    }
+    res.push(str);
+  }
+  return res;
+};
