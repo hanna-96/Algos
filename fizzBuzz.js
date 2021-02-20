@@ -63,3 +63,24 @@ const fizzBuzz = (n) => {
   }
   return res;
 };
+//solution 3
+const fizzBuzz = (n) => {
+  let res = [];
+  let obj = {
+    3: "Fizz",
+    5: "Buzz",
+  };
+  for (let i = 1; i <= n; i++) {
+    let num = i;
+    let str = "";
+    for (let key in obj) {
+      if (num % key === 0) str += obj[key];
+    }
+
+    if (!str.length) {
+      str = num.toString();
+    }
+    res.push(str);
+  }
+  return res;
+};
