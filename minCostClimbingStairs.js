@@ -32,3 +32,12 @@ var minCostClimbingStairs = function (cost) {
     finalCost[finalCost.length - 2]
   );
 };
+//Time O(n), Space O(1)
+var minCostClimbingStairs = function (cost) {
+  //calculate the minimum cost to step on each stair starting from the bottom;
+  //for aech stair compare is it better to reach it from the previous step OR from the one before the previous
+  for (let i = 2; i < cost.length; i++) {
+    cost[i] = Math.min(cost[i - 1] + cost[i], cost[i - 2] + cost[i]);
+  }
+  return Math.min(cost[cost.length - 1], cost[cost.length - 2]);
+};
