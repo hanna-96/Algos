@@ -41,3 +41,16 @@ var minCostClimbingStairs = function (cost) {
   }
   return Math.min(cost[cost.length - 1], cost[cost.length - 2]);
 };
+//dynamic programming
+var minCostClimbingStairs = function (cost) {
+  let step1 = 0;
+  let step2 = 0;
+  //calculate the minimum cost to step on each stair starting from the bottom;
+  //for aech stair compare is it better to reach it from the previous step OR from the one before the previous
+  for (let i = cost.length - 1; i >= 0; i--) {
+    let currentStep = cost[i] + Math.min(step1, step2);
+    step1 = step2;
+    step2 = currentStep;
+  }
+  return Math.min(step1, step2);
+};
