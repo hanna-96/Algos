@@ -54,3 +54,24 @@ var intersect = function (nums1, nums2) {
   }
   return res;
 };
+
+//solution 2 Sorting
+var intersect = function (nums1, nums2) {
+    let res = [];
+    nums1.sort((a, b) => a - b);
+    nums2.sort((a, b) => a - b);
+    let p1 = 0;
+    let p2 = 0;
+    let p3 = 0;
+    while (p1 < nums1.length && p2 < nums2.length) {
+      if (nums1[p1] === nums2[p2]) {
+        res[p3] = nums1[p1];
+        p1++;
+        p2++;
+        p3++;
+      } else if (nums1[p1] < nums2[p2]) p1++;
+      else p2++;
+    }
+    return res;
+  };
+  
