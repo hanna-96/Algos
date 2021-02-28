@@ -119,3 +119,29 @@ class Node {
     this.prev = null;
   }
 }
+
+//solution 2 using Map();
+const LRUCache = function (capacity) {
+  this.capacity = capacity;
+  this.map = new Map();
+};
+
+LRUCache.prototype.get = function (key) {
+  if (!this.map.has(key)) return -1;
+  let valueToReturn = this.map.get(key);
+  this.map.delete(key);
+  this.map.set(key, valueToReturn);
+  return valueToReturn;
+};
+
+LRUCache.prototype.put = function (key, value) {
+  if (this.map.has(key)) {
+    this.map.delete(key);
+  }
+  this.map.set(key, value);
+  if (this.map.size > this.capacity) {
+    let keys = this.map.keys();
+    //the least recently used key will be in the beginning of map
+    this.map.delete(keys.next().value);
+  }
+};
