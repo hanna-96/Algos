@@ -34,3 +34,20 @@ const strStr1 = (h, n) =>{
     }
     return -1
 };
+//solution 3
+const strStr3 = (haystack, needle) =>{
+    if (!needle.length) return 0;
+    let p1 = 0;
+    while (p1 < haystack.length) {
+        let next = p1;
+        let p2 = 0;
+        while(haystack[next] === needle[p2] && p2 < needle.length){
+            next++;
+            p2++;
+        }
+        if(p2 === needle.length) return p1;
+        p1++;
+
+    }
+    return -1
+};
