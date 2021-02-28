@@ -24,3 +24,13 @@ const strStr = (haystack, needle) => {
     return -1;
   };
   
+  //solution using 2 pointers
+const strStr1 = (h, n) =>{
+    if (!n) return 0
+    for (let j = 0, i = 0; i < h.length; i++) {
+        if (h[i] === n[j]) j++
+        else (i -= j, j = 0)
+        if (j === n.length) return i - j + 1
+    }
+    return -1
+};
