@@ -28,3 +28,20 @@ const numPairsDivisibleBy60 = (time) => {
     }
     return count;
   };
+  //solution 2
+// for each number in times array find the value =  num % 60 ;
+//and then find how much else we need to add to that value so that it becomes 60
+//Time O(n); Space O(n)
+const numPairsDivisibleBy60 = (time) => {
+    let count = 0;
+    let arr = new Array(60).fill(0);
+    for (let i = 0; i < time.length; i++) {
+      let t = time[i] % 60;
+      let remaining = (60 - t) % 60;
+      count += arr[remaining];
+      if (arr[t] === 0) arr[t] = 1;
+      else arr[t] += 1;
+    }
+  
+    return count;
+  };
