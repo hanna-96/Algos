@@ -14,3 +14,29 @@ function sortedSquaredArray(array) {
   }
   return res.sort((a, b) => a - b);
 }
+
+//optimal solution
+//Time O(n), Space O(n)
+function sortedSquaredArray(array) {
+  // initialize two pointers
+  //one pointing to the potential smallest value
+  //another pointing to the potential larger value
+  //start looping and compare the absolute values of numbers under those pointers
+  //place them into the right position in the res array
+  let res = new Array(array.length);
+  let smallerIdx = 0;
+  let largerIdx = array.length - 1;
+
+  for (let i = array.length - 1; i >= 0; i--) {
+    let smallerVal = array[smallerIdx];
+    let largerVal = array[largerIdx];
+    if (Math.abs(smallerVal) < Math.abs(largerVal)) {
+      res[i] = largerVal * largerVal;
+      largerIdx--;
+    } else {
+      res[i] = smallerVal * smallerVal;
+      smallerIdx++;
+    }
+  }
+  return res;
+}
