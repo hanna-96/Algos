@@ -59,3 +59,26 @@ PhoneDirectory.prototype.check = function (number) {
 PhoneDirectory.prototype.release = function (number) {
   if (!this.queue.includes(number)) this.queue.push(number);
 };
+
+//solution 2 , using Set
+var PhoneDirectory = function (maxNumbers) {
+  this.set = new Set();
+  for (let i = 0; i < maxNumbers; i++) {
+    this.set.add(i);
+  }
+};
+//Time O(1),Space O(1)
+PhoneDirectory.prototype.get = function () {
+  if (!this.set.size) return -1;
+  let valToReturn = this.set.keys().next().value;
+  this.set.delete(valToReturn);
+  return valToReturn;
+};
+//Time O(1),Space O(1)
+PhoneDirectory.prototype.check = function (number) {
+  return this.set.has(number);
+};
+//Time O(1),Space O(1)
+PhoneDirectory.prototype.release = function (number) {
+  this.set.add(number);
+};
