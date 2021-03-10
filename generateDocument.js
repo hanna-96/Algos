@@ -31,3 +31,20 @@ function generateDocument(characters, document) {
   }
   return true;
 }
+//solution with no extra space
+//Time O(m*(n+m)); Space O(1), where n is the number of characters and m is the length of document
+function generateDocument(characters, document) {
+  for (let char of document) {
+    let documentFrequency = calculateFrequency(char, document);
+    let charactersFrequency = calculateFrequency(char, characters);
+    if (documentFrequency > charactersFrequency) return false;
+  }
+  return true;
+}
+function calculateFrequency(char, string) {
+  let frequency = 0;
+  for (let letter of string) {
+    if (letter === char) frequency++;
+  }
+  return frequency;
+}
