@@ -17,7 +17,23 @@
 
 // Input: lists = []
 // Output: []
-//approach 1, using extra space(creating a new LL)
+
+//aproach 1 ,merging in place
+//Time O(k*n);
+//Space O(1);
+var mergeKLists = function (lists) {
+  if (!lists.length) return null;
+  //every time compare two LL(starting from first two LL) and merge them into one LL
+
+  while (lists.length > 1) {
+    let l1 = lists.shift();
+    let l2 = lists.shift();
+    lists.push(mergeTwoSortedLists(l1, l2));
+  }
+  return lists[0];
+};
+
+//approach 2, using extra space(creating a new LL)
 //Time O(k*N), where k is number od linked lists, n is the total number of nodes in each list
 //Space O(k)
 var mergeKLists = function (lists) {
