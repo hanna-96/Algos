@@ -41,7 +41,8 @@ var minCostClimbingStairs = function (cost) {
   }
   return Math.min(cost[cost.length - 1], cost[cost.length - 2]);
 };
-//dynamic programming
+//dynamic programming solution
+//Time O(n), Space O(1)
 var minCostClimbingStairs = function (cost) {
   let step1 = 0;
   let step2 = 0;
