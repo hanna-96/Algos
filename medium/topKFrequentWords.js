@@ -33,3 +33,23 @@ var topKFrequent = function (words, k) {
   }
   return res;
 };
+//solution 2
+//Time O(n log n);Space O(n)
+
+var topKFrequent = function (words, k) {
+  let sorted = words.sort();
+  let map = new Map();
+  let res = [];
+
+  for (let word of sorted) {
+    map.set(word, map.get(word) + 1 || 1);
+  }
+
+  let values = map.entries();
+  let sortedValues = [...values].sort((a, b) => b[1] - a[1]);
+  sortedValues = sortedValues.slice(0, k);
+  for (let [word, freq] of sortedValues) {
+    res.push(word);
+  }
+  return res;
+};
