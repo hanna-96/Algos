@@ -53,3 +53,32 @@ function traverseNode(i, j, grid) {
     traverseNode(i, j - 1, grid)
   );
 }
+
+    //solution 2 
+    var maxAreaOfIsland = function(grid) {
+      // iterate grid
+          //once we find 1 call helper function to explore 4 neighbors 
+          // in that helper func check if we are out of bounds or if cell === 0 return 0;;
+          // otherwise call recursively on 4 neighbors
+          let total = {count:0};
+          for(let i = 0; i < grid.length; i++){
+              for(let j = 0; j < grid[0].length; j++){
+                  if(grid[i][j] === 1) {
+                  exploreNeighbors(grid,total,i,j)
+                  }
+              }
+          }
+          return total.count;
+      };
+
+function exploreNeighbors(grid,total,row,col,currentResult = {count:0}){
+  if(row < 0 || row >= grid.length || col < 0 || col >= grid[0].length || grid[row][col] === 0 ) return 0;
+  total.count = Math.max(total.count, currentResult.count+=1)
+     grid[row][col] = 0; //mark it as visited
+      
+      exploreNeighbors(grid,total,row+1,col,currentResult) 
+      exploreNeighbors(grid,total,row-1,col,currentResult) 
+      exploreNeighbors(grid,total,row,col + 1,currentResult) 
+      exploreNeighbors(grid,total,row,col - 1,currentResult);
+
+      }
