@@ -52,8 +52,6 @@ var setZeroes = function (matrix) {
       were initially 0 before we set them up to be, if so change the whole row or col
       to 0
   */
-  let n = matrix.length;
-  let c = matrix[0].length;
   let firstRowSetToZero = false;
   let firstColSetToZero = false;
 
