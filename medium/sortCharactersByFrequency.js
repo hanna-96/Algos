@@ -41,3 +41,29 @@ const frequencySort = (s) => {
   }
   return finalStr;
 };
+
+//solution 2 , using bucket sort
+//Time O(n), space O(n)
+var frequencySort = function (s) {
+  const freqMap = new Map();
+  const bucket = [];
+  let output = "";
+
+  for (let c of s) {
+    freqMap.set(c, (freqMap.get(c) || 0) + 1);
+  }
+  for (let [char, freq] of freqMap) {
+    if (bucket[freq] === undefined) bucket[freq] = [char];
+    else bucket[freq].push(char); // if there're several chars with the same frequnce count => store them together
+  }
+  // eventually bucket array will be sorted, because those letteres that have largest freq count will be at the very end of bucket array;
+  // In bucket array i === freq count
+  for (let i = bucket.length - 1; i >= 0; i--) {
+    if (bucket[i] === undefined) continue;
+
+    for (let char of bucket[i]) {
+      output += char.repeat(i);
+    }
+  }
+  return output;
+};
