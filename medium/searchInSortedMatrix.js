@@ -13,8 +13,10 @@
 // ]
 //target = 44
 //Output [3,3]
+
+//Time O(n+m), at most we will traverse entire rows(n) and entire columns(m), Space O(1)
+
 function searchInSortedMatrix(matrix, target) {
-  // Write your code here.
   //pointers approach
   let row = 0;
   let col = matrix[0].length - 1;
