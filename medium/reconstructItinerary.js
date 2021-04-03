@@ -9,25 +9,25 @@
     */
 var findItinerary = function (tickets) {
   let result = [];
-  let set = new Set();
   let map = new Map();
   for (const [from, to] of tickets) {
     if (!map.has(from)) map.set(from, [to]);
     else {
       map.get(from).push(to);
-      let sortedRoutes = map.get(from).sort((a, b) => a.localeCompare(b));
-      map.set(from, sortedRoutes);
+      map.get(from).sort();
     }
   }
 
   helper("JFK", map, result);
-  return result.reverse();
+  return result.reverse(); //reverse because of the callstack
 };
 function helper(initialCity, map, result) {
   let directions = map.get(initialCity);
+  //every time we examine one of the directions =>shift it=>because when we come back to the same airport it shoudn't call helper on the direction we already examined
   while (directions && directions.length) {
-    const destination = directions.shift();
+    const destination = directions.shift(); //ATL, JFK,
     helper(destination, map, result);
   }
-  result.push(initialCity);
+  //once we reached the end of the itinerary (no more destinatons) => start pushing cities
+  result.push(initialCity); // ["SFO","ATL","SFO","JFK","ATL","JFK"]
 }
