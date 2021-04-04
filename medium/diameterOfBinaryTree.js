@@ -14,21 +14,26 @@
 // Time Complexity: O(N). We visit every node once.
 
 // Space Complexity: O(N), the size of our implicit call stack during our depth-first search.
+
 function diameterOfBinaryTree(root) {
-  let max = 0;
+  // find the longest path of left subtree(exluding root);
+  // 	find the elongest path of right subtree(excluding root)
+  // 	combine the lengths of those paths + 1(root)
+  // 	find the longest path including root
+  let diameter = 0;
 
-  function maxDepth(root) {
-    if (root === null) return 0; // if our root(num) is null then there is no path. return 0/null
-    let left = maxDepth(root.left); // Assign the left  of tree to LEFT; this will be easier to call it instead of writing "maxDepth(root.left)" each time
-    let right = maxDepth(root.right); //Same above
-    console.log("left", left);
-    console.log("right", right);
-
-    max = Math.max(max, left + right); //if the path doesn't go through the root we just get the max of them
-
-    return Math.max(left, right) + 1; // the path goes through the root so we add 1(for the root)
+  // helper function will return the longest path between left or right tree + root node
+  function getLongestPath(root) {
+    if (root === null) return 0;
+    const leftHeight = getLongestPath(root.left);
+    const rightHeight = getLongestPath(root.right);
+    const longestPathSoFar = leftHeight + rightHeight; // <- means a diameter
+    // update the diameter if left_path plus right_path is larger
+    diameter = Math.max(diameter, longestPathSoFar);
+    // returning the length of the longest branch between a node's left and right branches.
+    // remember to add 1 for the path connecting the node and its parent
+    return Math.max(leftHeight, rightHeight) + 1;
   }
-  //since we don't know if the path will go through the root or not we will have to get the max between(path that visits the root, or the path that doesn't go through the root.)
-  maxDepth(root);
-  return max;
+  getLongestPath(root);
+  return diameter;
 }
