@@ -24,3 +24,26 @@ var numSubarrayProductLessThanK = function (nums, k) {
     }
     return total;
   };
+
+
+// Optimal sliding window approach
+//Time O(n), SPace O(1)
+var numSubarrayProductLessThanK = function (nums, k) {
+    if (k <= 1) return 0;
+    let total = 0;
+    let start = 0;
+    let end = 0;
+    let product = 1;
+    while (start < nums.length && end < nums.length) {
+      if (product * nums[end] < k) {
+        product *= nums[end]; //5 * 2  * 6
+        total += end - start + 1; //3 + 2 + 3
+        end++;
+      } else {
+        product /= nums[start];
+        start++;
+      }
+    }
+    return total;
+  };
+  
