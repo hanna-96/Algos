@@ -14,7 +14,7 @@ The largest value in BST will be a;ways the leaf right node of the tight child o
 1.Go all the way down the right subtree => visit the lead right node => visit the root=> visit the left node
 2. Eventually we'll have a sorted array of all node values from the tree.
 3. Return the k th node from array.
-Time O(n),Space O(n),where n is the number of nodes in the tree
+Time O(n + k),Space O(h),where h is the height of the tree and k is input parameter
 */
 function findKthLargestValueInBst(tree, k) {
   if (!tree) return null;
@@ -22,7 +22,7 @@ function findKthLargestValueInBst(tree, k) {
   return nodes[k - 1];
 }
 function findtheLargest(tree, k, arr = []) {
-  if (!tree) return;
+  if (!tree || arr.length >= k) return;
 
   findtheLargest(tree.right, k, arr);
   arr.push(tree.value);
