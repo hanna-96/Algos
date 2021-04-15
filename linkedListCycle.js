@@ -18,3 +18,16 @@ const hasCycle = (head) => {
   }
   return false;
 };
+//Optimal solution using fast and slow pointers
+//Time O(n),Space O(1)
+const hasCycle = (head) => {
+  if (!head) return false;
+  let slow = head;
+  let fast = head.next;
+  while (slow !== fast) {
+    if (fast === null || fast.next === null) return false;
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return true;
+};
