@@ -9,3 +9,12 @@ const hasCycle = (head) => {
   }
   return false;
 };
+//solution modyfing input list
+const hasCycle = (head) => {
+  while (head) {
+    if (head.val === "#") return true;
+    head.val = "#";
+    head = head.next;
+  }
+  return false;
+};
