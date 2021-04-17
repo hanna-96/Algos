@@ -16,9 +16,7 @@ function longestPalindromicSubstring(string) {
     let curLong = "";
     for (let j = i; j < string.length; j++) {
       let curSubStr = string.slice(i, j + 1);
-      console.log("longest", longestStr);
 
-      console.log("curSubst", curSubStr);
       if (isPalindrome(curSubStr)) {
         curLong = curSubStr;
       }
@@ -39,4 +37,31 @@ function isPalindrome(string) {
     right--;
   }
   return true;
+}
+//Optimal solution
+//Time O(n^2);Space O(n)
+function longestPalindromicSubstring(string) {
+  //let's expand from the center of letter to the left and to the right and check for palindrome
+  //we'll check every center of a potential palindrome
+  //if length of string is Odd =>we'll have letter in the center;
+  // ''if length is EVEN => we won't have letter in center
+  let currentLongest = [0, 1];
+  for (let i = 0; i < string.length; i++) {
+    const even = isPalindrome(string, i, i);
+    const odd = isPalindrome(string, i, i + 1);
+    const longest = odd[1] - odd[0] > even[1] - even[0] ? odd : even;
+    currentLongest =
+      currentLongest[1] - currentLongest[0] > longest[1] - longest[0]
+        ? currentLongest
+        : longest;
+  }
+  return string.slice(currentLongest[0], currentLongest[1]);
+}
+function isPalindrome(str, left, right) {
+  while (left >= 0 && right <= str.length) {
+    if (str[left] !== str[right]) break;
+    left--;
+    right++;
+  }
+  return [left + 1, right];
 }
