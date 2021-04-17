@@ -16,3 +16,21 @@ var dailyTemperatures = function (T) {
   }
   return result;
 };
+//Optimal solution using stack
+//Time O(n);Space O(n);
+var dailyTemperatures = function (T) {
+  let result = new Array(T.length).fill(0);
+  let stack = [];
+  for (let i = 0; i < T.length; i++) {
+    let temp = T[i];
+    if (stack.length && T[stack[stack.length - 1]] < temp) {
+      while (T[stack[stack.length - 1]] < temp) {
+        let idx = stack.pop();
+        result[idx] = i - idx;
+      }
+    }
+    stack.push(i);
+  }
+
+  return result;
+};
