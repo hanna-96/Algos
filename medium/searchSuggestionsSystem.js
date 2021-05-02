@@ -19,12 +19,34 @@ After typing mou, mous and mouse the system suggests ["mouse","mousepad"]
 */
 //Brute force
 var suggestedProducts = function (products, searchWord) {
-    products.sort();
-    let res = [];
-    for (let i = 0; i < searchWord.length; i++) {
-      products = products.filter((p) => p[i] == searchWord[i]);
-      res.push(products.slice(0, 3));
+  products.sort();
+  let res = [];
+  for (let i = 0; i < searchWord.length; i++) {
+    products = products.filter((p) => p[i] == searchWord[i]);
+    res.push(products.slice(0, 3));
+  }
+  return res;
+};
+//Optimised solution using Trie
+var suggestedProducts = function (products, searchWord) {
+  let res = [];
+  products.sort();
+  let trie = {};
+
+  for (let product of products) {
+    let node = trie;
+    for (let letter of product) {
+      if (!(letter in node)) {
+        node[letter] = { "*": [] };
+      }
+      if (node[letter]["*"].length < 3) node[letter]["*"].push(product);
+      node = node[letter];
     }
-    return res;
-  };
-  
+  }
+
+  for (let char of searchWord) {
+    if (trie) trie = trie[char];
+    res.push(!trie ? [] : trie["*"]);
+  }
+  return res;
+};
